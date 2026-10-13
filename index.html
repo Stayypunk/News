@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости мира и села Карпівці</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .news-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .no-news {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📰 Новости мира и села Карпівці</h1>
+            <p>Будьте в курсе последних событий  приїжайте в Карпівці</p>
+        </header>
+       
+
+        <div class="filters">
+            <button class="filter-btn active" data-category="all">Все</button>
+            <button class="filter-btn" data-category="технология">Технология</button>
+            <button class="filter-btn" data-category="спорт">Спорт</button>
+            <button class="filter-btn" data-category="политика">Политика</button>
+            <button class="filter-btn" data-category="развлечение">Развлечение</button>
+            <button class="filter-btn" data-category="Карпівці">Новости села Карпівці</button>
+        </div>
+
+        <div class="news-grid" id="newsContainer"></div>
+        <div class="no-news" id="noNews" style="display: none;">Новостей не найдено</div>
+         <footer>
+            <p style="text-align: center; color: white; margin-top: 20px;">&copy; 2026 Новости. Все права защищены.<br>Охайо  це я робив сайт  не хочу йти на завод</p>
+        </footer>
+    </div>
+
+    <script>
+        const newsData = [
+            {
+                id: 1,
+                title: 'Новые технологии AI революционизируют индустрию',
+                description: 'Искусственный интеллект становится более доступным и мощным, открывая новые возможности для бизнеса.',
+                category: 'технология',
+                date: '29 августа 2026',
+                Image: 'https://odkb-csto.org/upload/iblock/010/4bs2713gzsl7xt7rtvug6hdvrg548zuz.webp'
+            },
+            {
+                id: 2,
+                title: 'Спортсмен установил новый мировой рекорд',
+                description: 'На международном чемпионате был установлен впечатляющий рекорд, побивший все предыдущие достижения.',
+                category: 'спорт',
+                date: '28 августа 2026',
+                Image: 'https://www.ambal.ru/22972296661.jpg'
+            },
+            {
+                id: 3,
+                title: 'Политические события меняют мировую ситуацию',
+                description: 'Важные решения на уровне правительства влияют на развитие экономики и международных отношений.',
+                category: 'политика',
+                date: '27 августа 2026',
+                Image: 'https://sky.kr.ua/wp-content/uploads/2021/04/1231.jpg'
+            },
+            {
+                id: 4,
+                title: 'Премьера нового фильма побила кассовые рекорды',
+                description: 'Долгожданный кинофильм собрал огромную аудиторию и получил положительные отзывы критиков.',
+                category: 'развлечение',
+                date: '26 августа 2026'
+            },
+            {
+                id: 5,
+                title: 'Квантовый компьютер достиг нового уровня производительности',
+                description: 'Ученые представили прорывную разработку, которая может трансформировать вычисления.',
+                category: 'технология',
+                date: '25 августа 2026'
+            },
+            {
+                id: 6,
+                title: 'Олимпийские игры: итоги первой недели',
+                description: 'Спортсмены демонстрируют невероятное мастерство и преодолевают свои личные рекорды.',
+                category: 'спорт',
+                date: '24 августа 2026'
+            },
+            {
+                id: 7,
+                title: 'Фестиваль в селе Карпівці привлек thousands посетителей',
+                description: 'Местные жители и гости сельского района собрались для участия в увлекательном фестивале але був дощ.',
+                category: 'Карпівці',
+                date: '23 августа 2026',
+                Image: 'https://akvo.com.ua/image/catalog/stati/186.jpg'
+            }
+        ];
+
+        let currentCategory = 'all';
+
+        function renderNews(category) {
+            const container = document.getElementById('newsContainer');
+            const noNews = document.getElementById('noNews');
+            
+            let filtered = category === 'all' 
+                ? newsData 
+                : newsData.filter(news => news.category === category);
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                noNews.style.display = 'block';
+                return;
+            }
+
+            noNews.style.display = 'none';
+            container.innerHTML = filtered.map(news => `
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="${news.Image}" alt="${news.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-category">${news.category}</div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-description">${news.description}</p>
+                        <div class="news-date">📅 ${news.date}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.category;
+                renderNews(currentCategory);
+            });
+        });
+
+        renderNews('all');
+    </script>
+</body>
+</html>
