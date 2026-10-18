@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cloudflare.com"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Новости мира и села Карпівці</title>
     <style>
         * {
@@ -154,6 +156,15 @@
                 padding: 20px;
             }
         }
+        .popular-tags {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+        }
+
+        #zelensky-link {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -177,7 +188,13 @@
         <div class="news-grid" id="newsContainer"></div>
         <div class="no-news" id="noNews" style="display: none;">Новостей не найдено</div>
          <footer>
-            <p style="text-align: center; color: white; margin-top: 20px;">&copy; 2026 Новости. Все права защищены.<br>Охайо  це я робив сайт  не хочу йти на завод</p>
+            <p style="text-align: center; color: white; margin-top: 20px;">&copy; 2026 Новости. Все права защищены. <br>Популярні теги:
+<a href="#" id="zelensky-link">Володимир Зеленський</a>
+<a href="#">Дональд Трамп</a>
+<a href="#">Війна</a>
+<a href="#">Джаред Кушнер</a>
+<a href="#">Стів Віткофф</a>
+<a href="#">Переговори</a><br>Охайо  це я робив сайт  не хочу йти на завод</p>
         </footer>
     </div>
 
@@ -312,6 +329,14 @@
                 currentCategory = btn.dataset.category;
                 renderNews(currentCategory);
             });
+        });
+
+        const zelenskyLink = document.getElementById('zelensky-link');
+        zelenskyLink.addEventListener('click', event => {
+            event.preventDefault();
+            zelenskyLink.classList.remove('animate__animated', 'animate__wobble');
+            void zelenskyLink.offsetWidth;
+            zelenskyLink.classList.add('animate__animated', 'animate__wobble');
         });
 
         renderNews('all');
